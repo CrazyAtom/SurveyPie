@@ -16,10 +16,10 @@ const TextArea = styled.textarea`
   height: 196px;
   resize: none;
 
-  border: 1px solid #E0E0E0
+  border: 1px solid #e0e0e0;
   box-sizing: border-box;
   border-radius: 5px;
-
+  width: 100%;
   font-size: 18px;
   line-height: 21px;
 
