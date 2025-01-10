@@ -8,7 +8,12 @@ function QuestionBox({ question, questionsLength, step, answer, setAnswer }) {
     <div>
       <Title>{question.title}</Title>
       <Desc>{question.desc}</Desc>
-      <Body type={question.type} answer={answer} setAnswer={setAnswer}></Body>
+      <Body
+        type={question.type}
+        options={question.options}
+        answer={answer}
+        setAnswer={setAnswer}
+      ></Body>
       <ActionButtons
         questionsLength={questionsLength}
         step={step}

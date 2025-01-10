@@ -1,19 +1,21 @@
 import styled from 'styled-components';
 
-function TextInput({ answer, setAnswer, options }) {
+function TextAreaInput({ answer, setAnswer, options }) {
   return (
-    <Input
+    <TextArea
       type="text"
       value={answer}
       onChange={(e) => {
         setAnswer(e.target.value);
       }}
-      placeholder={options.placeholder}
     />
   );
 }
 
-const Input = styled.input`
+const TextArea = styled.textarea`
+  height: 196px;
+  resize: none;
+
   border: 1px solid #E0E0E0
   box-sizing: border-box;
   border-radius: 5px;
@@ -21,7 +23,7 @@ const Input = styled.input`
   font-size: 18px;
   line-height: 21px;
 
-  padding: 12px 18px 12px 18px;
+  padding: 12px 18px;
 `;
 
-export default TextInput;
+export default TextAreaInput;
