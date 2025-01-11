@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-function TextInput({ answer, setAnswer, options }) {
+function TextInput({ answer = '', setAnswer, options }) {
   return (
     <Input
       type="text"
@@ -9,6 +9,7 @@ function TextInput({ answer, setAnswer, options }) {
         setAnswer(e.target.value);
       }}
       placeholder={options.placeholder}
+      {...(options?.max && { maxLength: options.max })}
     />
   );
 }

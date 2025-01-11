@@ -1,14 +1,24 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
+import useAnswers from '../../hooks/useAnswers';
+import useRequiredOption from '../../hooks/useReauiredOption';
 import useStep from '../../hooks/useStep';
-import questionsLengthState from '../../store/questions/questionsLengthState';
+import useSurveyId from '../../hooks/useSurveyId';
+import postAnswers from '../../services/postAnswers';
+import questionsLengthState from '../../stores/survey/questionsLengthState';
 import Button from '../Button';
 
 function ActionButtons() {
+  const surveyId = useSurveyId();
   const step = useStep();
+  const answers = useAnswers();
+  const [isPosting, setIsPosting] = useState(false);
   const questionsLength = useRecoilValue(questionsLengthState);
+  const isRequired = useRequiredOption();
+  const isBlockToNext = isRequired ? !answers[step]?.length : false;
 
   const isLast = questionsLength - 1 === step;
   const navigate = useNavigate();
@@ -29,10 +39,19 @@ function ActionButtons() {
         <Button
           type="PRIMARY"
           onClick={() => {
-            navigate('/done');
+            setIsPosting(true);
+            postAnswers({ surveyId: surveyId, data: answers })
+              .then(() => {
+                navigate(`/done/${surveyId}`);
+              })
+              .catch((error) => {
+                alert('응답 제출에 실패했습니다. 다시 시도해 주세요.');
+                setIsPosting(false);
+              });
           }}
+          disabled={isPosting || isBlockToNext}
         >
-          제출
+          {isPosting ? '제출 중입니다...' : '제출'};
         </Button>
       ) : (
         <Button
@@ -40,6 +59,7 @@ function ActionButtons() {
           onClick={() => {
             navigate(`${step + 1}`);
           }}
+          disabled={isBlockToNext}
         >
           다음
         </Button>
