@@ -1,17 +1,19 @@
 import { Layout, Menu } from 'antd';
-import React from 'react';
+import React, { useState } from 'react';
 const { Header, Content, Sider } = Layout;
-function getItem(label, key, icon, children) {
-  return {
-    key,
-    icon,
-    children,
-    label,
-  };
-}
-const items = [getItem('설문 조사 관리', '1')];
+
+const items = [
+  { key: 'list', label: '설문 조사 관리' },
+  { key: 'builder', label: '빌더' },
+];
 
 function MainLayout({ children }) {
+  const [current, setCurrent] = useState('list');
+  const onClick = (e) => {
+    console.log('click ', e.key);
+    setCurrent(e.key);
+  };
+
   return (
     <Layout
       style={{
@@ -29,8 +31,9 @@ function MainLayout({ children }) {
           }}
         />
         <Menu
+          onClick={onClick}
           theme="dark"
-          defaultSelectedKeys={['1']}
+          selectedKeys={[current]}
           mode="inline"
           items={items}
         />
