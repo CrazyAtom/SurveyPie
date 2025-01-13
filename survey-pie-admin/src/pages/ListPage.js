@@ -1,7 +1,7 @@
 import MainLayout from '../layouts/MainLayout';
 
 function ListPage() {
-  return <MainLayout>Content of ListPage</MainLayout>;
+  return <MainLayout selectedKeys={['list']}>Content of ListPage</MainLayout>;
 }
 
 export default ListPage;

@@ -1,19 +1,9 @@
 import { Layout, Menu } from 'antd';
-import React, { useState } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 const { Header, Content, Sider } = Layout;
 
-const items = [
-  { key: 'list', label: '설문 조사 관리' },
-  { key: 'builder', label: '빌더' },
-];
-
-function MainLayout({ children }) {
-  const [current, setCurrent] = useState('list');
-  const onClick = (e) => {
-    console.log('click ', e.key);
-    setCurrent(e.key);
-  };
-
+function MainLayout({ selectedKeys, children }) {
   return (
     <Layout
       style={{
@@ -30,13 +20,11 @@ function MainLayout({ children }) {
             radius: 6,
           }}
         />
-        <Menu
-          onClick={onClick}
-          theme="dark"
-          selectedKeys={[current]}
-          mode="inline"
-          items={items}
-        />
+        <Menu theme="dark" selectedKeys={selectedKeys} mode="inline">
+          <Menu.Item key="list">
+            <Link to="/list">설문 조사 관리</Link>
+          </Menu.Item>
+        </Menu>
       </Sider>
       <Layout>
         <Header />
