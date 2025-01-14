@@ -38,6 +38,76 @@
       "createdAt": 1647160914620
     },
     {
+      "id": 2,
+      "title": "올림픽 설문조사2",
+      "questions": [
+        {
+          "title": "어떤 올림픽이 더 재밌었나요?",
+          "desc": "(1개 선택)",
+          "required": true,
+          "options": {
+            "max": 1,
+            "items": ["평창 동계 올림픽", "베이징 동계 올림픽"]
+          },
+          "type": "select"
+        },
+        {
+          "title": "평창 동계 올림픽에서 가장 재밌었던 종목은 무엇인가요?",
+          "desc": "(1개 선택)",
+          "required": true,
+          "options": {
+            "max": 1,
+            "items": [
+              "쇼트트랙",
+              "피겨 스케이팅",
+              "컬링",
+              "스키점프",
+              "스켈레톤"
+            ]
+          },
+          "type": "select"
+        },
+        {
+          "title": "베이징 동계 올림픽에서 가장 재밌었던 종목은 무엇인가요?",
+          "desc": "(1개 선택)",
+          "required": true,
+          "options": {
+            "max": 1,
+            "items": [
+              "쇼트트랙",
+              "피겨 스케이팅",
+              "컬링",
+              "스키점프",
+              "스켈레톤"
+            ]
+          },
+          "type": "select"
+        },
+        {
+          "title": "평창 동계 올림픽에서 어떤 나라가 가장 잘했다고 생각하시나요?",
+          "desc": "(1개 선택)",
+          "required": true,
+          "options": {
+            "max": 1,
+            "items": ["대한민국", "일본", "중국", "미국", "기타"]
+          },
+          "type": "select"
+        },
+        {
+          "title": "베이징 동계 올림픽에서 어떤 나라가 가장 잘했다고 생각하시나요?",
+          "desc": "(1개 선택)",
+          "required": true,
+          "options": {
+            "max": 1,
+            "items": ["대한민국", "일본", "중국", "미국", "기타"]
+          },
+          "type": "select"
+        }
+      ],
+      "createdAt": 1647160914621
+    },
+    {
+      "id": 3,
       "title": "올림픽 설문조사",
       "questions": [
         {
@@ -103,8 +173,7 @@
           "type": "select"
         }
       ],
-      "createdAt": 1647160914621,
-      "id": 2
+      "createdAt": 1647160914621
     }
   ],
   "answers": [

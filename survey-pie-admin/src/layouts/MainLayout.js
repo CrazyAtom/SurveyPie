@@ -1,5 +1,5 @@
 import { Layout, Menu } from 'antd';
-import React, { useState } from 'react';
+import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 const { Header, Content, Sider } = Layout;
 
@@ -8,18 +8,18 @@ const menuItems = [
     label: <Link to="/list">설문 조사 관리</Link>,
     key: 'list',
   },
-  {
-    label: <Link to="/builder">빌더</Link>,
-    key: 'builder',
-  },
+  // {
+  //   label: <Link to="/builder">빌더</Link>,
+  //   key: 'builder',
+  // },
 ];
 
 function MainLayout({ selectedKeys, children }) {
-  const [current, setCurrent] = useState('list');
-
+  const contentStyle = useMemo(() => {
+    return { padding: 45 };
+  });
   const onMenu = (e) => {
-    console.log('click ', e);
-    setCurrent(e.key);
+    // console.log('click ', e);
   };
 
   return (
@@ -48,7 +48,7 @@ function MainLayout({ selectedKeys, children }) {
       </Sider>
       <Layout>
         <Header />
-        <Content>{children}</Content>
+        <Content style={contentStyle}>{children}</Content>
       </Layout>
     </Layout>
   );
