@@ -1,16 +1,19 @@
 import { Col, Input, Row } from 'antd';
-import { produce } from 'immer';
-import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import OptionSection from '../components/OptionSection';
 import PreviewSection from '../components/PreviewSection';
 import MainLayout from '../layouts/MainLayout';
-import { setTitle } from '../stores/survey/surveySlice';
+import {
+  addQuestion,
+  deleteQuestion,
+  moveDownQuestion,
+  moveUpQuestion,
+  setTitle,
+} from '../stores/survey/surveySlice';
 
 function BuilderPage() {
   const survey = useSelector((state) => state.survey);
-  const [data, setData] = useState();
   const dispatch = useDispatch();
 
   return (
@@ -25,56 +28,27 @@ function BuilderPage() {
             }}
           />
           <PreviewSection
-            questions={data.questions}
+            questions={survey.questions}
             addQuestion={() => {
-              setData(
-                produce((draft) => {
-                  draft.questions.push({
-                    title: 'Untitled',
-                    desc: '',
-                    type: 'text',
-                    required: false,
-                    options: {
-                      max: 20,
-                      placeholder: '',
-                    },
-                  });
-                }),
-              );
+              dispatch(addQuestion());
             }}
             moveUpQuestion={(index) => {
               if (index === 0) {
                 return;
               }
-              setData(
-                produce((draft) => {
-                  const temp = draft.questions[index];
-                  draft.questions[index] = draft.questions[index - 1];
-                  draft.questions[index - 1] = temp;
-                }),
-              );
+              dispatch(moveUpQuestion(index));
             }}
             moveDownQuestion={(index) => {
-              if (index === data.questions.length - 1) {
+              if (index === survey.questions.length - 1) {
                 return;
               }
-              setData(
-                produce((draft) => {
-                  const temp = draft.questions[index];
-                  draft.questions[index] = draft.questions[index + 1];
-                  draft.questions[index + 1] = temp;
-                }),
-              );
+              dispatch(moveDownQuestion(index));
             }}
             deleteQuestion={(index) => {
-              if (data.questions.length === 1) {
+              if (survey.questions.length === 1) {
                 return;
               }
-              setData(
-                produce((draft) => {
-                  draft.questions.splice(index, 1);
-                }),
-              );
+              dispatch(deleteQuestion(index));
             }}
           />
         </Col>

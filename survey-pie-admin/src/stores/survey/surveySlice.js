@@ -43,12 +43,46 @@ export const surveySlice = createSlice({
   initialState,
   reducers: {
     setTitle: (state, action) => {
+      console.log(action);
       state.title = action.payload;
+    },
+    addQuestion: (state) => {
+      state.questions.push({
+        title: 'Untitled',
+        desc: '',
+        type: 'text',
+        required: false,
+        options: {
+          max: 20,
+          placeholder: '',
+        },
+      });
+    },
+    moveUpQuestion: (state, action) => {
+      const index = action.payload;
+      const temp = state.questions[index];
+      state.questions[index] = state.questions[index - 1];
+      state.questions[index - 1] = temp;
+    },
+    moveDownQuestion: (state, action) => {
+      const index = action.payload;
+      const temp = state.questions[index];
+      state.questions[index] = state.questions[index + 1];
+      state.questions[index + 1] = temp;
+    },
+    deleteQuestion: (state, action) => {
+      state.questions.splice(action.payload, 1);
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setTitle } = surveySlice.actions;
+export const {
+  setTitle,
+  addQuestion,
+  moveUpQuestion,
+  moveDownQuestion,
+  deleteQuestion,
+} = surveySlice.actions;
 
 export default surveySlice.reducer;
