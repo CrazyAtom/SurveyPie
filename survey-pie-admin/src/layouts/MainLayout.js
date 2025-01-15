@@ -1,7 +1,7 @@
-import { Layout, Menu } from 'antd';
-import React, { useMemo } from 'react';
-import { Link } from 'react-router-dom';
-const { Header, Content, Sider } = Layout;
+import {Layout, Menu} from 'antd';
+import React, {useMemo} from 'react';
+import {Link} from 'react-router-dom';
+const {Header, Content, Sider} = Layout;
 
 const menuItems = [
   {
@@ -14,11 +14,11 @@ const menuItems = [
   // },
 ];
 
-function MainLayout({ selectedKeys, children }) {
+function MainLayout({selectedKeys, children, padding = 45}) {
   const contentStyle = useMemo(() => {
-    return { padding: 45 };
-  });
-  const onMenu = (e) => {
+    return {padding};
+  }, [padding]);
+  const onMenu = e => {
     // console.log('click ', e);
   };
 

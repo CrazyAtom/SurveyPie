@@ -1,6 +1,6 @@
-import { Table } from 'antd';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import {Table} from 'antd';
+import {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
 import useSWR from 'swr';
 
 import MainLayout from '../layouts/MainLayout';
@@ -21,7 +21,7 @@ const columns = [
     title: '생성일',
     dataIndex: 'createdAt',
     key: 'createdAt',
-    render: (createdAt) => {
+    render: createdAt => {
       const time = new Date(createdAt);
       return `${time.getFullYear()}-${time.getMonth() + 1}-${time.getDate()}`;
     },
@@ -30,7 +30,7 @@ const columns = [
     title: '액션',
     dataIndex: 'id',
     key: 'action',
-    render: (id) => {
+    render: id => {
       return (
         <button
           onClick={() => {
@@ -47,7 +47,7 @@ const columns = [
 const PAGE_SISE = 20;
 
 function ListPage() {
-  const { data, error } = useSWR('/surveys', fetcher);
+  const {data, error} = useSWR('/surveys', fetcher);
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
 
@@ -64,8 +64,7 @@ function ListPage() {
       <Table
         onRow={(record, rowIndex) => {
           return {
-            onClick: (event) => {
-              console.log('onclick', record.id);
+            onClick: event => {
               navigate(`/builder/${record.id}`);
             }, // click row
           };
@@ -75,12 +74,12 @@ function ListPage() {
           current: page,
           pageSize: PAGE_SISE,
         }}
-        onChange={(pagination) => {
+        onChange={pagination => {
           console.log(pagination);
           setPage(pagination.current);
         }}
         columns={columns}
-        dataSource={data.map((item) => ({ ...item, key: item.id }))}
+        dataSource={data.map(item => ({...item, key: item.id}))}
       />
     </MainLayout>
   );

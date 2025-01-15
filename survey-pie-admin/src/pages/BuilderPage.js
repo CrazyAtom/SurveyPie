@@ -28,7 +28,7 @@ function BuilderPage() {
   }
 
   return (
-    <MainLayout selectedKeys={['builder']}>
+    <MainLayout selectedKeys={['builder']} padding={0}>
       <Row>
         <Col flex="auto">
           <BuilderTitleInput />
