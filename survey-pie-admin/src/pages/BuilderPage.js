@@ -1,8 +1,11 @@
 import { Col, Input, Row } from 'antd';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 import OptionSection from '../components/OptionSection';
 import PreviewSection from '../components/PreviewSection';
+import fetchSurvey from '../components/services/fetchSurvey';
 import MainLayout from '../layouts/MainLayout';
 import {
   addQuestion,
@@ -13,8 +16,23 @@ import {
 } from '../stores/survey/surveySlice';
 
 function BuilderPage() {
-  const survey = useSelector((state) => state.survey);
+  const survey = useSelector((state) => state.survey.data);
+  const loading = useSelector((state) => state.survey.loading);
+  const error = useSelector((state) => state.survey.error);
   const dispatch = useDispatch();
+  const params = useParams();
+
+  useEffect(() => {
+    dispatch(fetchSurvey(params.surveyId));
+  }, [dispatch, params.surveyId]);
+
+  if (error) {
+    return 'error';
+  }
+
+  if (!survey || loading) {
+    return 'loading';
+  }
 
   return (
     <MainLayout selectedKeys={['builder']}>
